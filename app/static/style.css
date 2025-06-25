@@ -1,0 +1,125 @@
+body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-image: url("bak.jpeg");
+            background-color: rgba(173, 179, 196, 0.5);
+        }
+
+        .con {
+            max-width: 1200px;
+            margin: auto;
+            background: #859dec;
+            padding: 30px;
+            border-radius: 50px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: #b3b9db;
+            padding: 30px;
+            border-radius: 50px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            color: #014050
+        }
+
+        h2,
+        h3 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            padding: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+            color: #859dec;
+            size-adjust: 15px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .flash {
+            padding: 1px;
+            margin-bottom: 15px;
+            background-color: #859dec;
+            border-left: 6px solid #448dec;
+            border-radius: 15px;
+            border-right: 6px solid #448dec;
+        }
+
+        .menu-btn {
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            background: none;
+            border: none;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1001;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #859dec;
+            color: white;
+            padding-top: 60px;
+            transition: 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background-color: #6c84c7;
+        }
+
+        .sidebar.show {
+            left: 0;
+        }
+
+        .con {
+            padding: 20px;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        .con.shift {
+            margin-left: 250px;
+        }
+
+        

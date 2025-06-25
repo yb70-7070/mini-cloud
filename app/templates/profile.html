@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+</head>
+
+<body>
+    <h2>User Profile: {{ username }}</h2>
+
+    <h3>Your Storage Stats</h3>
+    <p>Total files uploaded: {{ total_files }}</p>
+    <p>Total storage used: {{ '%.2f'|format(total_size_mb) }} MB / 100MB</p>
+
+
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+
+    <h3>Change Password</h3>
+    <form method="POST">
+        <div class="group">
+            <input required="" type="password" name="current_password" class="input">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Current Password</label>
+        </div>
+
+        <div class="group">
+            <input required="" type="password" name="new_password" class="input">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>New Password</label>
+        </div>
+
+        <div class="group">
+            <input required="" type="password" name="confirm_password" class="input">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Confirm Password</label>
+        </div>
+        <input type="submit" value="Update Password">
+    </form>
+
+    <br>
+    <a href="{{ url_for('main.dashboard') }}">Back to Dashboard</a></div>
+</body>
+
+</html>

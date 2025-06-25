@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Preview Image</title>
+</head>
+<body>
+    <img src="{{ url_for('main.serve_file', filename=filename) }}" alt="Image" style="max-width:100%;">
+</body>
+</html>

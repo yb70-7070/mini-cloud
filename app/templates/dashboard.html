@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard - Mini Cloud</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <div id="sidebar" class="sidebar">
+        <a href="{{ url_for('main.profile') }}">Profile</a>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+    </div>
+
+    <div class="con">
+        <div class="container">
+            <h2>What's on your mind, {{ current_user.id }}?</h2>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="flash">
+                {% for msg in messages %}
+                <p>{{ msg }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <form method="POST" enctype="multipart/form-data" style="margin: 20px 0; max-width: 400px;">
+    <label style="font-weight: bold; display: block; margin-bottom: 10px;">Upload a file:</label>
+
+    <div style="display: flex; align-items: center;">
+        <input type="file" name="file" required>
+        <input type="submit" value="Upload"
+            style="padding: 8px 16px; border: none; background-color: #5264AE; color: white; border-radius: 0 6px 6px 0; cursor: pointer;">
+    </div>
+</form>
+
+            </p>
+
+        </div>
+    </div>
+
+    <form method="GET" action="{{ url_for('main.dashboard') }}" style="margin: 20px 0;">
+        <div style="display: flex; align-items: center; max-width: 400px;">
+            <input type="text" name="q" placeholder="Search files..." value="{{ request.args.get('q', '') }}" required
+                style="flex: 1; padding: 10px 15px; border: 1px solid #ccc; border-radius: 6px 0 0 6px; outline: none;">
+            <input type="submit" value="Search"
+                style="padding: 10px 20px; border: none; background-color: #5264AE; color: white; border-radius: 0 6px 6px 0; cursor: pointer;">
+        </div>
+    </form>
+
+
+    {% if request.args.get('q') %}
+    <a href="{{ url_for('main.dashboard') }}" style="margin-left: 10px;">Show All Files</a>
+    {% endif %}
+
+    <h3>Your Files:</h3>
+    {% if files %}
+    <ul>
+        {% for file in files %}
+        <li>
+            {% set ext = file.name.rsplit('.', 1)[-1].lower() %}
+
+            {% if ext in ['jpg', 'jpeg', 'png', 'gif'] %}
+            <a href="{{ url_for('main.preview', filename=file.name) }}" target="_blank">
+                <img src="{{ url_for('main.serve_file', filename=file.name) }}" alt="Image"
+                    style="width:30px; height: 30px;">
+            </a>
+            {% elif ext == 'pdf' %}
+            📄 PDF
+            {% elif ext in ['doc', 'docx'] %}
+            📄 Word
+            {% elif ext in ['txt'] %}
+            📄 Text
+            {% else %}
+            📦 Other
+            {% endif %}
+
+            {{ file.name }} ({{ file.size }} KB)
+            - <a href="{{ url_for('main.download', filename=file.name) }}">Download</a>
+            - <a href="{{ url_for('main.preview', filename=file.name) }}" target="_blank">Preview</a>
+
+            <form action="{{ url_for('main.delete', filename=file.name) }}" method="POST" style="display:inline;">
+                <button type="submit" style="background:none; border:none; color:red; cursor:pointer;">Delete</button>
+            </form>
+        </li>
+
+
+
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No files uploaded yet.</p>
+    {% endif %}
+
+    <br>
+
+    <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            sidebar.classList.toggle('show');
+            mainContent.classList.toggle('shift');
+        }
+
+        // Close sidebar when clicking on the main content
+        document.getElementById('main-content').addEventListener('click', function () {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+
+            if (sidebar.classList.contains('show')) {
+                sidebar.classList.remove('show');
+                mainContent.classList.remove('shift');
+            }
+        });
+    </script>
+</body>
+
+</html>

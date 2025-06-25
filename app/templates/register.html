@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - Mini Cloud</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+</head>
+<body>
+    <h2>Register</h2>
+    <form method="POST">
+        <div class="group">
+            <input required="" type="text" name="username" class="input">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Username</label>
+        </div>
+
+        <div class="group">
+            <input required="" type="password" name="password" class="input">
+            <span class="highlight"></span>
+            <span class="bar"></span>
+            <label>Password</label>
+        </div>
+
+        <input type="submit" value="Register">
+    </form>
+    <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a></p>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for msg in messages %}
+            <li>{{ msg }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+</body>
+</html>
